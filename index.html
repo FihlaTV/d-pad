@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>D-Pad</title>
+        <meta name="description" content="D-pad">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="assets/font/foundation-icons.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/combo?pure/0.6.0/base-min.css&pure/0.6.0/grids-min.css&pure/0.6.0/grids-responsive-min.css">
+    </head>
+    <body>
+      <label class="ip-label" for="ip-input">Please, introduce server address:</label>
+      <input type="text" id="ip-input" placeholder="e.g. 192.168.1.10" onkeyUp="DPad.testIp(this);" value="127.0.0.1">
+        
+      <label class="name-label" for="name-input">Please, introduce your name:</label>
+      <input type="text" id="name-input" placeholder="e.g. Henry Armitage">
+        
+      <div id="error-message"></div>
+        
+      <div id="switch" class="switch white" style="display:none;">
+          <input type="radio" name="switch" id="switch-off" onchange="DPad.enable(false);" checked>
+          <input type="radio" name="switch" id="switch-on" onchange="DPad.enable(true);">
+
+          <label for="switch-off">Off</label>
+          <label for="switch-on">On</label>
+
+          <span class="toggle"></span>
+      </div>
+      
+      <div class="container-dpad">
+        <div class="block-group">
+            <div class="b6 block"></div>
+            <div class="b7 block"></div>
+            <button class="b8 block dpad fi-arrow-up" onclick="DPad.sendAction('direction','up');"></button>
+            <div class="b9 block"></div>
+            <div class="b10 block"></div>
+        </div>
+        <div class="block-group">
+            <div class="b6 block"></div>
+            <button class="b7 block dpad fi-arrow-left" value="Left" onclick="DPad.sendAction('direction','left');"></button>
+            <div class="b8 block dpad"></div>
+            <button class="b9 block dpad fi-arrow-right" value="Right" onclick="DPad.sendAction('direction','right');"></button>
+            <div class="b10 block"></div>
+        </div>
+        <div class="block-group">
+            <div class="b6 block"></div>
+            <div class="b7 block"></div>
+            <button class="b8 block dpad fi-arrow-down" value="Down" onclick="DPad.sendAction('direction','down');"></button>
+            <div class="b9 block"></div>
+            <div class="b10 block"></div>
+        </div>
+      </div>
+        
+        <script src="js/main.js"></script>
+    </body>
+</html>

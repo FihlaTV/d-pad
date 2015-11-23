@@ -1,0 +1,158 @@
+/*! PocketGrid 1.1.0
+* Copyright 2013 Arnaud Leray
+* MIT License
+*/.block-group,.block,.block-group:after,.block:after,.block-group:before,.block:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.block-group{*zoom:1}
+.block-group:before,.block-group:after{display:table;content:"";line-height:0}
+.block-group:after{clear:both}
+.block-group{list-style-type:none;padding:0;margin:0}
+.block-group>.block-group{clear:none;float:left;margin:0 !important}
+.block{float:left;width:100%}
+
+/* 
+* Custom style 
+*/
+
+/* Main */
+html {
+  background-color: dimgrey
+}
+
+button:before {
+  font-size: 4em;
+}
+
+.ip-label, .name-label {
+  color: white;
+  text-align: center;
+  margin: 1em auto;
+  display: table;
+}
+
+input[type="text"] {
+  margin: 1em auto;
+  display: table;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: solid 5px #c9c9c9;
+  box-shadow: inset 0 0 0 1px #707070;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+input[type="text"]:focus,
+input[type="text"].focus {
+  border: solid 5px #969696;
+}
+
+.hide {
+  display: none;
+}
+/* Grid */
+
+.b6, .b7, .b8, .b9, .b10 { 
+  width: 30%;    
+  height: 6em;
+  text-align: center;
+}
+
+.b6, .b10 {
+  width: 5%;
+  text-align: center;
+}
+
+.dpad{
+  background-color: black;
+  color: white;
+  font-size: 1em;
+}
+
+/* Switch */
+.container {
+	height: 64px;
+	left: 50%;
+	margin: -32px 0 0 -80px;
+	position: absolute;
+	top: 50%;
+	width: 160px;
+}
+
+.switch {
+	background: #fff;
+	border-radius: 32px;
+	display: block;
+	height: 64px;
+	position: relative;
+	width: 160px;
+    margin: 2em auto;
+}
+
+.switch label {
+	color: #fff;
+	font-size: 1.5em;
+	font-weight: 300;
+	line-height: 64px;
+	text-transform: uppercase;
+	-webkit-transition: color .2s ease;
+	-moz-transition: color .2s ease;
+	-ms-transition: color .2s ease;
+	-o-transition: color .2s ease;
+	transition: color .2s ease;
+	width: 100px;
+}
+
+.switch label:nth-of-type(1) {
+	left: -75%;
+	position: absolute;
+	text-align: right;
+}
+
+.switch label:nth-of-type(2) {
+	position: absolute;
+  right: -75%;
+	text-align: left;
+}
+
+.switch input {
+	height: 64px;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	width: 160px;
+	z-index: 2;
+}
+
+.switch input:checked~label:nth-of-type(1) { color: #fff; }
+.switch input:checked~label:nth-of-type(2) { color: #808080; }
+
+.switch input~:checked~label:nth-of-type(1) { color: #808080; }
+.switch input~:checked~label:nth-of-type(2) { color: #fff; }
+
+.switch input:checked~.toggle {
+	left: 4px;
+}
+
+.switch input~:checked~.toggle {
+	left: 100px;
+}
+
+.switch input:checked {
+	z-index: 0;
+}
+
+.toggle {
+	background: #4a4a4a;
+	border-radius: 50%;
+	height: 56px;
+	left: 0;
+	position: absolute;
+	top: 4px;
+	-webkit-transition: left .2s ease;
+	-moz-transition: left .2s ease;
+	-ms-transition: left .2s ease;
+	-o-transition: left .2s ease;
+	transition: left .2s ease;
+	width: 56px;
+	z-index: 1;
+}
