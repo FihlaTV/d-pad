@@ -22,15 +22,51 @@
       }
 
       this.socket.onmessage = function(e) {
+          var dpadContainer = document.getElementById('container-dpad'),
+              playerType = document.getElementById('type-of-player'),
+              htmlObject = document.getElementsByTagName('html')[0],
+              form = document.getElementsByTagName('form')[0];
+        
           self.dataReceived = JSON.parse(e.data);
           console.log(e.data);
+        
+          if (
+            self.dataReceived && 
+            self.dataReceived.role &&
+            self.dataReceived.color
+          ) {
+            //Hide form, show the d-pad, update the player type and applies the color
+            //form.style.display = 'none';
+            dpadContainer.style.display = 'block';
+            playerType.innerHTML = (self.dataReceived.role).toUpperCase();
+            htmlObject.style.background = self.dataReceived.color;
+          }
       }
 
       this.socket.onclose = function(e) {
+          var errorMessage = document.getElementById('error-message')
+              dpadContainer = document.getElementById('container-dpad'),
+              playerType = document.getElementById('type-of-player'),
+              htmlObject = document.getElementsByTagName('html')[0],
+              form = document.getElementsByTagName('form')[0];
+        
+          //Restart the initial value
+          //form.style.display = 'block';
+          dpadContainer.style.display = 'none';
+          playerType.innerHTML = '';
+          htmlObject.style.background = 'dimgrey';
+          errorMessage.innerHTML = 'Connection closed';
           console.log("Connection closed.");
-          this.socket = null;
-          this.isopen = false;
+          
       }
+    },
+    restartData: function() {
+        this.socket = null;
+        this.currentAction = '';
+        this.currentId = '';
+        this.dataReceived = null;
+        this.isopen = false;
+        this.playerName = '';
     },
     enable: function(option) {
       var nameInput = document.getElementById('name-input'),
@@ -63,9 +99,13 @@
             console.log(payload);
         }
     },
-    testIp: function(field) {
-      var re = new RegExp('^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$');
-      if (re.test(field.value)) {
+    isFormFilled: function() {
+      var ipField = document.getElementById('ip-input'),
+          nameField = document.getElementById('name-input'),
+          errorMessage = document.getElementById('error-message');
+      
+      errorMessage.innerHTML = '';
+      if (ipField.value !== '' && nameField.value !== '') {
         document.getElementById('switch').style.display = 'block';
       } else {
         document.getElementById('switch').style.display = 'none';

@@ -12,25 +12,9 @@
         <link rel="stylesheet" href="http://yui.yahooapis.com/combo?pure/0.6.0/base-min.css&pure/0.6.0/grids-min.css&pure/0.6.0/grids-responsive-min.css">
     </head>
     <body>
-      <label class="ip-label" for="ip-input">Please, introduce server address:</label>
-      <input type="text" id="ip-input" placeholder="e.g. 192.168.1.10" onkeyUp="DPad.testIp(this);" value="127.0.0.1">
-        
-      <label class="name-label" for="name-input">Please, introduce your name:</label>
-      <input type="text" id="name-input" placeholder="e.g. Henry Armitage">
-        
-      <div id="error-message"></div>
-        
-      <div id="switch" class="switch white" style="display:none;">
-          <input type="radio" name="switch" id="switch-off" onchange="DPad.enable(false);" checked>
-          <input type="radio" name="switch" id="switch-on" onchange="DPad.enable(true);">
-
-          <label for="switch-off">Off</label>
-          <label for="switch-on">On</label>
-
-          <span class="toggle"></span>
-      </div>
+      <h3 id="type-of-player"></h3>
       
-      <div class="container-dpad">
+      <div id="container-dpad" class="container-dpad">
         <div class="block-group">
             <div class="b6 block"></div>
             <div class="b7 block"></div>
@@ -53,6 +37,24 @@
             <div class="b10 block"></div>
         </div>
       </div>
+      <form>
+          <h1>D-Pad</h1>
+          <input type="text" id="ip-input" placeholder="Server address" onkeyUp="DPad.isFormFilled();" value="104.131.202.172">
+          <input type="text" id="name-input" placeholder="Player name" onkeyUp="DPad.isFormFilled();" autofocus>
+      
+          <div id="switch" class="switch white" style="display:none;">
+              <input type="radio" name="switch" id="switch-off" onchange="DPad.enable(false);" checked>
+              <input type="radio" name="switch" id="switch-on" onchange="DPad.enable(true);">
+
+              <label for="switch-off">Off</label>
+              <label for="switch-on">On</label>
+
+              <span class="toggle"></span>
+          </div>
+        
+          <div id="error-message"></div>
+      </form>
+      
         
         <script src="js/main.js"></script>
     </body>
