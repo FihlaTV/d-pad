@@ -5,7 +5,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>D-Pad</title>
         <meta name="description" content="D-pad">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="stylesheet" href="assets/font/foundation-icons.css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
@@ -13,7 +13,7 @@
     </head>
     <body>
       <h3 id="type-of-player"></h3>
-      
+
       <div id="container-dpad" class="container-dpad">
         <div class="block-group">
             <div class="b6 block"></div>
@@ -41,7 +41,7 @@
           <h1>D-Pad</h1>
           <input type="text" id="ip-input" placeholder="Server address" onkeyUp="DPad.isFormFilled();" value="104.131.202.172">
           <input type="text" id="name-input" placeholder="Player name" onkeyUp="DPad.isFormFilled();" autofocus>
-      
+
           <div id="switch" class="switch white" style="display:none;">
               <input type="radio" name="switch" id="switch-off" onchange="DPad.enable(false);" checked>
               <input type="radio" name="switch" id="switch-on" onchange="DPad.enable(true);">
@@ -51,11 +51,11 @@
 
               <span class="toggle"></span>
           </div>
-        
+
           <div id="error-message"></div>
       </form>
-      
-        
+
+
         <script src="js/main.js"></script>
     </body>
 </html>
