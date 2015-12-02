@@ -48,9 +48,11 @@
               dpadContainer = document.getElementById('container-dpad'),
               playerType = document.getElementById('type-of-player'),
               htmlObject = document.getElementsByTagName('html')[0],
+              switchOff = document.getElementById("switch-off"),
               form = document.getElementsByTagName('form')[0];
 
           //Restart the initial value
+          switchOff.checked = true;
           dpadContainer.style.display = 'none';
           playerType.innerHTML = '';
           htmlObject.style.background = 'dimgrey';
