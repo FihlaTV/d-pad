@@ -1,23 +1,24 @@
 ;(function() {
-  
+
   var DPad = function() {
     this.socket = null;
     this.currentAction = '';
+    this.currentDirection = '';
     this.currentId = '';
     this.dataReceived = null;
     this.playerName = '';
   };
   DPad.prototype = {
     initSocketConnection: function() {
-      var self = this;    
-    
+      var self = this;
+
       this.remoteAddress = document.getElementById('ip-input').value;
       this.socket = new WebSocket('ws://' + this.remoteAddress + ':9000');
 
       this.socket.onopen = function() {
           this.isopen = true;
           console.log("Connected!");
-          
+
           self.sendAction('want-to-play');
       }
 
@@ -26,17 +27,16 @@
               playerType = document.getElementById('type-of-player'),
               htmlObject = document.getElementsByTagName('html')[0],
               form = document.getElementsByTagName('form')[0];
-        
+
           self.dataReceived = JSON.parse(e.data);
           console.log(e.data);
-        
+
           if (
-            self.dataReceived && 
+            self.dataReceived &&
             self.dataReceived.role &&
             self.dataReceived.color
           ) {
             //Hide form, show the d-pad, update the player type and applies the color
-            //form.style.display = 'none';
             dpadContainer.style.display = 'block';
             playerType.innerHTML = (self.dataReceived.role).toUpperCase();
             htmlObject.style.background = self.dataReceived.color;
@@ -49,20 +49,20 @@
               playerType = document.getElementById('type-of-player'),
               htmlObject = document.getElementsByTagName('html')[0],
               form = document.getElementsByTagName('form')[0];
-        
+
           //Restart the initial value
-          //form.style.display = 'block';
           dpadContainer.style.display = 'none';
           playerType.innerHTML = '';
           htmlObject.style.background = 'dimgrey';
           errorMessage.innerHTML = 'Connection closed';
           console.log("Connection closed.");
-          
+
       }
     },
     restartData: function() {
         this.socket = null;
         this.currentAction = '';
+        this.currentDirection = '';
         this.currentId = '';
         this.dataReceived = null;
         this.isopen = false;
@@ -71,7 +71,7 @@
     enable: function(option) {
       var nameInput = document.getElementById('name-input'),
           errorMessage = document.getElementById('error-message');
-        
+
       if (option) {
         if (nameInput.value !== '') {
             errorMessage.innerHTML = '';
@@ -92,27 +92,36 @@
                 name: !!this.playerName ? this.playerName : '',
                 position: !!this.dataReceived ? this.dataReceived.position : null
             };
-            if (!!direction) {
-                payload.direction = direction;
+            switch (type) {
+              case 'direction':
+                if (this.currentDirection !== direction) {
+                    this.currentDirection = direction;
+                    payload.direction = direction;
+                    this.socket.send(JSON.stringify(payload));
+                    console.log(payload);
+                }
+                break;
+              case 'want-to-play':
+                this.socket.send(JSON.stringify(payload));
+                console.log(payload);
+                break;
             }
-            this.socket.send(JSON.stringify(payload));
-            console.log(payload);
         }
     },
     isFormFilled: function() {
       var ipField = document.getElementById('ip-input'),
           nameField = document.getElementById('name-input'),
           errorMessage = document.getElementById('error-message');
-      
+
       errorMessage.innerHTML = '';
       if (ipField.value !== '' && nameField.value !== '') {
         document.getElementById('switch').style.display = 'block';
       } else {
         document.getElementById('switch').style.display = 'none';
-      }  
+      }
     }
   };
-  
+
   window['DPad'] = window['DPad'] || {};
   window['DPad'] = new DPad();
 })();
