@@ -87,7 +87,15 @@
         this.socket.close(1000, reasonId);
       }
     },
-    sendAction: function(type, direction) {
+    sendAction: function(type, direction, element) {
+        if (element) {
+          var buttons = document.getElementsByClassName('dpad');
+          for (var i = 0; i < buttons.length; i++) {
+            this.removeClass(buttons[i], 'pressed');
+          }
+
+          this.addClass(element, 'pressed');
+        }
         if (this.socket !== null && this.socket.isopen) {
             var payload = {
                 action: type,
@@ -121,7 +129,23 @@
       } else {
         document.getElementById('switch').style.display = 'none';
       }
-    }
+    },
+    addClass: function(target, className) {
+        if (typeof className === 'string') {
+            target.className += ' ' + className;
+        }
+    },
+    removeClass: function(target, className) {
+        if (typeof className === 'string') {
+            var classes = target.className.split(' '),
+                position = classes.indexOf(className);
+            if (position > -1) {
+                classes.splice(position);
+                target.className = classes.join(' ');
+            }
+        }
+    },
+
   };
 
   window['DPad'] = window['DPad'] || {};

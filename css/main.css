@@ -48,6 +48,10 @@ button:before {
   display: none;
 }
 
+.pressed {
+  opacity: 0.4;
+}
+
 .ip-label, .name-label {
   color: white;
   text-align: center;
