@@ -7,6 +7,11 @@
     this.currentId = '';
     this.dataReceived = null;
     this.playerName = '';
+    this.vibrate =
+        navigator.vibrate ||
+        navigator.webkitVibrate ||
+        navigator.mozVibrate ||
+        navigator.msVibrate;
   };
   DPad.prototype = {
     initSocketConnection: function() {
@@ -108,7 +113,10 @@
                     this.currentDirection = direction;
                     payload.direction = direction;
                     this.socket.send(JSON.stringify(payload));
-                    console.log(payload);
+                    if (this.vibrate) {
+                      // vibration API supported
+                      navigator.vibrate(200);
+                    }
                 }
                 break;
               case 'want-to-play':
